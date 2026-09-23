@@ -15,7 +15,7 @@ offset_bottom = 514.0
 texture_normal = ExtResource("2_n1hl3")
 
 [node name="CoinDisplay" type="HBoxContainer" parent="." unique_id=310697694]
-offset_right = 133.0
+offset_right = 145.0
 offset_bottom = 128.0
 
 [node name="TextureRect" type="TextureRect" parent="CoinDisplay" unique_id=2056147621]
@@ -30,5 +30,33 @@ layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 30
+
+[node name="Control" type="Control" parent="CoinDisplay" unique_id=912554292]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressUI" type="VBoxContainer" parent="CoinDisplay" unique_id=1579712999]
+layout_mode = 2
+
+[node name="NextItemIcon" type="TextureRect" parent="CoinDisplay/ProgressUI" unique_id=1983982029]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+
+[node name="UnlockProgressBar" type="ProgressBar" parent="CoinDisplay/ProgressUI" unique_id=494912400]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="UnlockLabel" type="Label" parent="CoinDisplay/ProgressUI" unique_id=1464251106]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="RecentItemsContainer" type="HBoxContainer" parent="." unique_id=2089062553]
+unique_name_in_owner = true
+offset_left = 30.0
+offset_top = 547.0
+offset_right = 101.0
+offset_bottom = 617.0
 
 [connection signal="pressed" from="TrashcanButton" to="." method="_on_trashcan_button_pressed"]
