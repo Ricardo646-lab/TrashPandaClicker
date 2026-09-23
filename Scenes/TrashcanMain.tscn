@@ -1,18 +1,18 @@
 [gd_scene format=3 uid="uid://b1qpg8003355f"]
 
-[ext_resource type="Script" uid="uid://cjxq6jui0a8ug" path="res://trashcanlogic.gd" id="1_ncw82"]
-[ext_resource type="Texture2D" uid="uid://b44m2vxvfob8v" path="res://Sprites/TrashcanSprite1.png" id="2_fmk55"]
-[ext_resource type="Texture2D" uid="uid://e87hay4md5r8" path="res://Sprites/CoinSprite1.png" id="3_fmk55"]
+[ext_resource type="Script" uid="uid://cjxq6jui0a8ug" path="res://Scripts/trashcanlogic.gd" id="1_2ocox"]
+[ext_resource type="Texture2D" uid="uid://b44m2vxvfob8v" path="res://Sprites/TrashcanSprite1.png" id="2_n1hl3"]
+[ext_resource type="Texture2D" uid="uid://e87hay4md5r8" path="res://Sprites/CoinSprite1.png" id="3_bgdht"]
 
 [node name="Node2D" type="Node2D" unique_id=1863187564]
-script = ExtResource("1_ncw82")
+script = ExtResource("1_2ocox")
 
 [node name="TrashcanButton" type="TextureButton" parent="." unique_id=366575650]
 offset_left = 276.0
 offset_top = 126.0
 offset_right = 858.0
 offset_bottom = 514.0
-texture_normal = ExtResource("2_fmk55")
+texture_normal = ExtResource("2_n1hl3")
 
 [node name="CoinDisplay" type="HBoxContainer" parent="." unique_id=310697694]
 offset_right = 133.0
@@ -21,7 +21,7 @@ offset_bottom = 128.0
 [node name="TextureRect" type="TextureRect" parent="CoinDisplay" unique_id=2056147621]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture = ExtResource("3_fmk55")
+texture = ExtResource("3_bgdht")
 expand_mode = 1
 stretch_mode = 5
 
