@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://b1qpg8003355f"]
+
+[ext_resource type="Script" uid="uid://cjxq6jui0a8ug" path="res://trashcanlogic.gd" id="1_ncw82"]
+[ext_resource type="Texture2D" uid="uid://b44m2vxvfob8v" path="res://Sprites/TrashcanSprite1.png" id="2_fmk55"]
+[ext_resource type="Texture2D" uid="uid://e87hay4md5r8" path="res://Sprites/CoinSprite1.png" id="3_fmk55"]
+
+[node name="Node2D" type="Node2D" unique_id=1863187564]
+script = ExtResource("1_ncw82")
+
+[node name="TrashcanButton" type="TextureButton" parent="." unique_id=366575650]
+offset_left = 276.0
+offset_top = 126.0
+offset_right = 858.0
+offset_bottom = 514.0
+texture_normal = ExtResource("2_fmk55")
+
+[node name="CoinDisplay" type="HBoxContainer" parent="." unique_id=310697694]
+offset_right = 133.0
+offset_bottom = 128.0
+
+[node name="TextureRect" type="TextureRect" parent="CoinDisplay" unique_id=2056147621]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("3_fmk55")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinCounter" type="Label" parent="CoinDisplay" unique_id=905640236]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 30
+
+[connection signal="pressed" from="TrashcanButton" to="." method="_on_trashcan_button_pressed"]
