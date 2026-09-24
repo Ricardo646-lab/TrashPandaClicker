@@ -17,15 +17,15 @@ public partial class TrashcanMain : Node2D
 		public string Icon { get; set; }
 	}
 
-	private List<DropItem> drops = new List<DropItem>
-	{
-		new DropItem { Name = "Banana", Value = 1, Weight = 50.0f, AmountFound = 0, Unlocked = true, ReqItem = "", ReqAmount = 0, Icon = "res://Sprites/BananaSprite.png" },
-		new DropItem { Name = "Can", Value = 2, Weight = 30.0f, AmountFound = 0, Unlocked = false, ReqItem = "Banana", ReqAmount = 100, Icon = "res://Sprites/CanSprite.png" },
-		new DropItem { Name = "Pizza", Value = 5, Weight = 12.0f, AmountFound = 0, Unlocked = false, ReqItem = "Can", ReqAmount = 50, Icon = "res://Sprites/PizzaSprite.png" },
-		new DropItem { Name = "Donut", Value = 10, Weight = 5.0f, AmountFound = 0, Unlocked = false, ReqItem = "Pizza", ReqAmount = 10, Icon = "res://Sprites/DonutSprite.png" },
-		new DropItem { Name = "Phone", Value = 50, Weight = 2.5f, AmountFound = 0, Unlocked = false, ReqItem = "Donut", ReqAmount = 5, Icon = "res://Sprites/PhoneSprite.png" },
-		new DropItem { Name = "Ring", Value = 250, Weight = 0.5f, AmountFound = 0, Unlocked = false, ReqItem = "Phone", ReqAmount = 2, Icon = "res://Sprites/RingSprite.png" }
-	};
+private List<DropItem> drops = new List<DropItem>
+  {
+    new DropItem { Name = "Banana", Value = 1, Weight = 100.0f, AmountFound = 0, Unlocked = true, ReqItem = "", ReqAmount = 0, Icon = "res://Sprites/BananaSprite.png" },
+    new DropItem { Name = "Can", Value = 2, Weight = 25.0f, AmountFound = 0, Unlocked = false, ReqItem = "Banana", ReqAmount = 250, Icon = "res://Sprites/CanSprite.png" },
+    new DropItem { Name = "Pizza", Value = 5, Weight = 5.0f, AmountFound = 0, Unlocked = false, ReqItem = "Can", ReqAmount = 150, Icon = "res://Sprites/PizzaSprite.png" },
+    new DropItem { Name = "Donut", Value = 10, Weight = 1.0f, AmountFound = 0, Unlocked = false, ReqItem = "Pizza", ReqAmount = 50, Icon = "res://Sprites/DonutSprite.png" },
+    new DropItem { Name = "Phone", Value = 50, Weight = 0.2f, AmountFound = 0, Unlocked = false, ReqItem = "Donut", ReqAmount = 20, Icon = "res://Sprites/PhoneSprite.png" },
+    new DropItem { Name = "Ring", Value = 250, Weight = 0.05f, AmountFound = 0, Unlocked = false, ReqItem = "Phone", ReqAmount = 5, Icon = "res://Sprites/RingSprite.png" }
+  };
 
 	public override void _Ready()
 	{
