@@ -149,12 +149,14 @@ public partial class TrashcanMain : Node2D
 		icon.Texture = GD.Load<Texture2D>(item.Icon);
 		icon.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
 		icon.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
-		icon.CustomMinimumSize = new Godot.Vector2(80, 80);
+		// Aangepast naar 48x48 zodat het compacter oogt
+		icon.CustomMinimumSize = new Godot.Vector2(48, 48);
 		
 		Label valueLabel = new Label();
 		valueLabel.Text = $"+{item.Value}";
 		valueLabel.HorizontalAlignment = HorizontalAlignment.Center;
-		valueLabel.AddThemeFontSizeOverride("font_size", 24);
+		// Lettergrootte verkleind naar 16 voor betere balans
+		valueLabel.AddThemeFontSizeOverride("font_size", 16);
 		
 		itemBox.AddChild(icon);
 		itemBox.AddChild(valueLabel);
