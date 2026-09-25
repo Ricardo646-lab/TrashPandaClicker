@@ -5,6 +5,8 @@ public partial class TrashcanMain : Node2D
 {
 	private int coins = 0;
 
+	private int bonusCoinsPerClick = 0;
+
 	public class DropItem
 	{
 		public string Name { get; set; }
@@ -42,7 +44,7 @@ public partial class TrashcanMain : Node2D
 	{
 		DropItem droppedItem = GetRandomDrop();
 		
-		coins += droppedItem.Value;
+		coins += droppedItem.Value + bonusCoinsPerClick;
 		GetNode<Label>("%CoinCounter").Text = coins.ToString();
 		droppedItem.AmountFound++;
 		
@@ -168,5 +170,27 @@ public partial class TrashcanMain : Node2D
 			Node oldestItem = recentItemsContainer.GetChild(0);
 			oldestItem.QueueFree();
 		}
+	}
+
+	public bool TrySpendCoins(int amount)
+	{
+		if (coins >= amount)
+		{
+			coins -= amount;
+			GetNode<Label>("%CoinCounter").Text = coins.ToString();
+			return true;
+		}
+		return false;
+	}
+
+	public void AddBonusPerClick(int amount)
+	{
+		bonusCoinsPerClick += amount;
+		GD.Print($"New Bonus Per Click: +{bonusCoinsPerClick}");
+	}
+
+	public int GetCoins()
+	{
+		return coins;
 	}
 }
