@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://e87hay4md5r8" path="res://Sprites/CoinSprite1.png" id="3_e5ji4"]
 [ext_resource type="Texture2D" uid="uid://b3wektopghi35" path="res://Sprites/ShoppingCartSprite.png" id="4_i4qx4"]
 [ext_resource type="Script" uid="uid://drxfnu04m0i0b" path="res://Scripts/ShopMenu.cs" id="5_e5ji4"]
+[ext_resource type="Texture2D" uid="uid://v0lphdgyp5gf" path="res://Sprites/Paw.png" id="6_wndna"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqcyg"]
 bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
@@ -26,6 +27,16 @@ corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dmjao"]
+bg_color = Color(0, 0.71082175, 0.21467903, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iau11"]
+bg_color = Color(0.22592008, 0.39905816, 0.22285384, 1)
 
 [node name="Node2D" type="Node2D" unique_id=1863187564]
 script = ExtResource("1_lagin")
@@ -176,7 +187,6 @@ size_flags_vertical = 4
 offset_transform_enabled = true
 
 [node name="ShopMenu" type="Control" parent="UI" unique_id=892547660]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -200,6 +210,85 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 0.9951296)
+theme_override_styles/panel = SubResource("StyleBoxFlat_wqcyg")
+
+[node name="CloseButton" type="Button" parent="UI/ShopMenu/ShopPanel" unique_id=290506473]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+offset_transform_enabled = true
+theme_override_font_sizes/font_size = 30
+text = "X"
+
+[node name="TitleLabel" type="Label" parent="UI/ShopMenu/ShopPanel" unique_id=1734135565]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 35
+text = "SHOP"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/ShopMenu/ShopPanel" unique_id=222611043]
+custom_minimum_size = Vector2(400, 470)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="UpgradeList" type="VBoxContainer" parent="UI/ShopMenu/ShopPanel/ScrollContainer" unique_id=1802470615]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+alignment = 1
+
+[node name="UpgradeItem" type="PanelContainer" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList" unique_id=740521813]
+layout_mode = 2
+
+[node name="ItemRow" type="HBoxContainer" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem" unique_id=1840834311]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow" unique_id=238446377]
+custom_minimum_size = Vector2(70, 40)
+layout_mode = 2
+texture = ExtResource("6_wndna")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextContainer" type="VBoxContainer" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow" unique_id=310746662]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow/TextContainer" unique_id=1275166332]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Bigger Paws"
+
+[node name="DescLabel" type="Label" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow/TextContainer" unique_id=1382141513]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "+1 per click!"
+
+[node name="LevelLabel" type="Label" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow" unique_id=514442082]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 23
+text = "LV. 0"
+
+[node name="BuyButton" type="Button" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow" unique_id=920015840]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 0
+theme_override_constants/icon_max_width = 50
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_dmjao")
+theme_override_styles/hover = SubResource("StyleBoxFlat_iau11")
+text = "10"
+icon = ExtResource("3_e5ji4")
+
+[node name="Control" type="Control" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow" unique_id=871289371]
+layout_mode = 2
 
 [connection signal="pressed" from="TrashcanButton" to="." method="_on_trashcan_button_pressed"]
 [connection signal="pressed" from="UI/TopHUD/CartPanel/MarginContainer/HBoxContainer/ShopButton" to="UI/ShopMenu" method="OpenShop"]
+[connection signal="pressed" from="UI/ShopMenu/ShopPanel/CloseButton" to="UI/ShopMenu" method="CloseShop"]
