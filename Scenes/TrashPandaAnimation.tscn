@@ -1,13 +1,58 @@
 [gd_scene format=3 uid="uid://f6lel0l4rytu"]
 
-[ext_resource type="Script" uid="uid://cl11oti01jqmj" path="res://Scripts/TrashcanRacoonAnimation.cs" id="1_afjyq"]
+[ext_resource type="Script" uid="uid://cvbujrhcxslca" path="res://Scripts/TrashcanRacoonAnimation.gd" id="1_ltmgp"]
 [ext_resource type="Texture2D" uid="uid://djv54vd7kmyok" path="res://Sprites/BG1.png" id="2_ltmgp"]
 [ext_resource type="Texture2D" uid="uid://dqee2c8gml87t" path="res://Sprites/TrashcanRaccoon9.png" id="3_sfr1t"]
 [ext_resource type="Texture2D" uid="uid://e87hay4md5r8" path="res://Sprites/CoinSprite1.png" id="3_xdvpq"]
+[ext_resource type="Script" uid="uid://ru2vh70ce1oq" path="res://Scripts/ShopMenu.gd" id="4_lgas1"]
 [ext_resource type="Texture2D" uid="uid://b3wektopghi35" path="res://Sprites/ShoppingCartSprite.png" id="4_sfr1t"]
-[ext_resource type="Script" uid="uid://drxfnu04m0i0b" path="res://Scripts/ShopMenu.cs" id="5_0hvsw"]
-[ext_resource type="Script" uid="uid://c82gtmgy3ck50" path="res://Scripts/UpgradeItem.cs" id="6_ltmgp"]
+[ext_resource type="Script" uid="uid://cbjhq0ookvb4v" path="res://Scripts/UpgradeItem.gd" id="5_uy6yq"]
 [ext_resource type="Texture2D" uid="uid://v0lphdgyp5gf" path="res://Sprites/Paw.png" id="7_lgas1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqcyg"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny2st"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfr1t"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne8vt"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy6yq"]
+bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n517"]
+bg_color = Color(0, 0.70980394, 0.21568628, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrrqv"]
+bg_color = Color(0.22592008, 0.39905816, 0.22285384, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvpq"]
 atlas = ExtResource("3_sfr1t")
@@ -220,65 +265,8 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wp5od"]
 size = Vector2(232, 343)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wqcyg"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ny2st"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sfr1t"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ne8vt"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uy6yq"]
-bg_color = Color(0.21568628, 0.21568628, 0.21568628, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8n517"]
-bg_color = Color(0, 0.70980394, 0.21568628, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrrqv"]
-bg_color = Color(0.22592008, 0.39905816, 0.22285384, 1)
-
-[node name="Node2D" type="Node2D" unique_id=1863187564]
-script = ExtResource("1_afjyq")
-
-[node name="Racoon" type="Area2D" parent="." unique_id=380682238]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Racoon" unique_id=1232483047]
-position = Vector2(550, 400)
-scale = Vector2(0.3, 0.3)
-sprite_frames = SubResource("SpriteFrames_wp5od")
-animation = &"dig_loop"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Racoon" unique_id=806708990]
-position = Vector2(552, 412.5)
-shape = SubResource("RectangleShape2D_wp5od")
+[node name="Node2D" type="Node2D" unique_id=1623361656]
+script = ExtResource("1_ltmgp")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1784484796]
 
@@ -428,7 +416,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("5_0hvsw")
+script = ExtResource("4_lgas1")
 
 [node name="ShopPanel" type="PanelContainer" parent="UI/ShopMenu" unique_id=427821878]
 custom_minimum_size = Vector2(450, 550)
@@ -478,8 +466,8 @@ alignment = 1
 
 [node name="UpgradeItem" type="PanelContainer" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList" unique_id=140734916]
 layout_mode = 2
-script = ExtResource("6_ltmgp")
-BaseCost = 10
+script = ExtResource("5_uy6yq")
+base_cost = 10
 
 [node name="ItemRow" type="HBoxContainer" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem" unique_id=961746976]
 layout_mode = 2
@@ -526,23 +514,44 @@ icon = ExtResource("3_xdvpq")
 [node name="Control" type="Control" parent="UI/ShopMenu/ShopPanel/ScrollContainer/UpgradeList/UpgradeItem/ItemRow" unique_id=466922709]
 layout_mode = 2
 
-[node name="Background" type="CanvasLayer" parent="." unique_id=182690538]
-layer = -3
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=1936945091]
+layer = -1
 
-[node name="Control" type="Control" parent="Background" unique_id=849001346]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="Background/Control" unique_id=1131310401]
-layout_mode = 1
-scale = Vector2(0.7481582, 0.6294567)
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer" unique_id=1555952827]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_ltmgp")
-stretch_mode = 6
-metadata/_edit_use_anchors_ = true
+expand_mode = 1
 
-[connection signal="pressed" from="UI/TopHUD/CartPanel/MarginContainer/HBoxContainer/ShopButton" to="UI/ShopMenu" method="OpenShop"]
-[connection signal="pressed" from="UI/ShopMenu/ShopPanel/CloseButton" to="UI/ShopMenu" method="CloseShop"]
+[node name="RaccoonCenter" type="Control" parent="BackgroundLayer/TextureRect" unique_id=776983090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Racoon" type="Area2D" parent="BackgroundLayer/TextureRect/RaccoonCenter" unique_id=380682238]
+position = Vector2(20, 20)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="BackgroundLayer/TextureRect/RaccoonCenter/Racoon" unique_id=1232483047]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_wp5od")
+animation = &"dig_loop"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackgroundLayer/TextureRect/RaccoonCenter/Racoon" unique_id=806708990]
+shape = SubResource("RectangleShape2D_wp5od")
+
+[connection signal="pressed" from="UI/TopHUD/CartPanel/MarginContainer/HBoxContainer/ShopButton" to="UI/ShopMenu" method="open_shop"]
+[connection signal="pressed" from="UI/ShopMenu/ShopPanel/CloseButton" to="UI/ShopMenu" method="close_shop"]
