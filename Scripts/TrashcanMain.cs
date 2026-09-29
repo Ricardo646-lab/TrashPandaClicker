@@ -3,179 +3,193 @@ using System.Collections.Generic;
 
 public partial class TrashcanMain : Node2D
 {
-	private int coins = 0;
+  private int coins = 0;
 
-	private int bonusClickPower = 0;
+  private int bonusClickPower = 0;
 
-	public class DropItem
-	{
-		public string Name { get; set; }
-		public int Value { get; set; }
-		public float Weight { get; set; }
-		public int AmountFound { get; set; }
-		public bool Unlocked { get; set; }
-		public string ReqItem { get; set; }
-		public int ReqAmount { get; set; }
-		public string Icon { get; set; }
-	}
+  public class DropItem
+  {
+    public string Name { get; set; }
+    public int Value { get; set; }
+    public float Weight { get; set; }
+    public int AmountFound { get; set; }
+    public bool Unlocked { get; set; }
+    public string ReqItem { get; set; }
+    public int ReqAmount { get; set; }
+    public string Icon { get; set; }
+  }
 
-	private List<DropItem> drops = new List<DropItem>
-	{
-		new DropItem { Name = "Banana", Value = 1, Weight = 50.0f, AmountFound = 0, Unlocked = true, ReqItem = "", ReqAmount = 0, Icon = "res://Sprites/BananaSprite.png" },
-		new DropItem { Name = "Can", Value = 2, Weight = 30.0f, AmountFound = 0, Unlocked = false, ReqItem = "Banana", ReqAmount = 100, Icon = "res://Sprites/CanSprite.png" },
-		new DropItem { Name = "Pizza", Value = 5, Weight = 12.0f, AmountFound = 0, Unlocked = false, ReqItem = "Can", ReqAmount = 50, Icon = "res://Sprites/PizzaSprite.png" },
-		new DropItem { Name = "Donut", Value = 10, Weight = 5.0f, AmountFound = 0, Unlocked = false, ReqItem = "Pizza", ReqAmount = 10, Icon = "res://Sprites/DonutSprite.png" },
-		new DropItem { Name = "Phone", Value = 50, Weight = 2.5f, AmountFound = 0, Unlocked = false, ReqItem = "Donut", ReqAmount = 5, Icon = "res://Sprites/PhoneSprite.png" },
-		new DropItem { Name = "Ring", Value = 250, Weight = 0.5f, AmountFound = 0, Unlocked = false, ReqItem = "Phone", ReqAmount = 2, Icon = "res://Sprites/RingSprite.png" }
-	};
+  private List<DropItem> drops = new List<DropItem>
+  {
+    new DropItem { Name = "Banana", Value = 1, Weight = 100.0f, AmountFound = 0, Unlocked = true, ReqItem = "", ReqAmount = 0, Icon = "res://Sprites/BananaSprite.png" },
+    new DropItem { Name = "Can", Value = 2, Weight = 25.0f, AmountFound = 0, Unlocked = false, ReqItem = "Banana", ReqAmount = 250, Icon = "res://Sprites/CanSprite.png" },
+    new DropItem { Name = "Pizza", Value = 5, Weight = 5.0f, AmountFound = 0, Unlocked = false, ReqItem = "Can", ReqAmount = 150, Icon = "res://Sprites/PizzaSprite.png" },
+    new DropItem { Name = "Donut", Value = 10, Weight = 1.0f, AmountFound = 0, Unlocked = false, ReqItem = "Pizza", ReqAmount = 50, Icon = "res://Sprites/DonutSprite.png" },
+    new DropItem { Name = "Phone", Value = 50, Weight = 0.2f, AmountFound = 0, Unlocked = false, ReqItem = "Donut", ReqAmount = 20, Icon = "res://Sprites/PhoneSprite.png" },
+    new DropItem { Name = "Ring", Value = 250, Weight = 0.05f, AmountFound = 0, Unlocked = false, ReqItem = "Phone", ReqAmount = 5, Icon = "res://Sprites/RingSprite.png" }
+  };
 
-	public override void _Ready()
-	{
-		var trashcanButton = GetNode<TextureButton>("TrashcanButton");
-		
-		Godot.Bitmap clickMask = new Godot.Bitmap();
-		clickMask.CreateFromImageAlpha(trashcanButton.TextureNormal.GetImage());
-		trashcanButton.TextureClickMask = clickMask;
-		
-		UpdateUnlockUI();
-	}
+  public override void _Ready()
+  {
+    var trashcanButton = GetNode<TextureButton>("TrashcanButton");
+    
+    Godot.Bitmap clickMask = new Godot.Bitmap();
+    clickMask.CreateFromImageAlpha(trashcanButton.TextureNormal.GetImage());
+    trashcanButton.TextureClickMask = clickMask;
+    
+    UpdateUnlockUI();
 
-	public void _on_trashcan_button_pressed()
-	{
-		DropItem droppedItem = GetRandomDrop();
+    // --- POKI SDK INTEGRATIE ---
+    if (HasNode("/root/PokiSDK"))
+    {
+        Node pokiSdk = GetNode("/root/PokiSDK");
+        
+      
+        pokiSdk.Call("gameplayStart");
+        GD.Print("Poki SDK: gameplayStart succesfully called.");
+    }
+    else
+    {
+        GD.Print("Poki SDK not found (plugin is disabled or not installed).");
+    }
+  }
 
-		int itemsGained = 1 + bonusClickPower;
+  public void _on_trashcan_button_pressed()
+  {
+    DropItem droppedItem = GetRandomDrop();
 
-		droppedItem.AmountFound += itemsGained;
-		
-		coins += droppedItem.Value;
-		GetNode<Label>("%CoinCounter").Text = coins.ToString();
-		
-		CheckForUnlocks(droppedItem);
-		UpdateUnlockUI();
-		AddRecentItem(droppedItem);
-	}
+    int itemsGained = 1 + bonusClickPower;
 
-	private DropItem GetRandomDrop()
-	{
-		List<DropItem> availableDrops = new List<DropItem>();
-		float totalWeight = 0.0f;
-		
-		foreach (var item in drops)
-		{
-			if (item.Unlocked)
-			{
-				availableDrops.Add(item);
-				totalWeight += item.Weight;
-			}
-		}
-		
-		float roll = (float)GD.RandRange(0.0, totalWeight);
-		float cumulativeChance = 0.0f;
-		
-		foreach (var item in availableDrops)
-		{
-			cumulativeChance += item.Weight;
-			if (roll <= cumulativeChance)
-			{
-				return item;
-			}
-		}
-		
-		return availableDrops[0];
-	}
+	droppedItem.AmountFound += itemsGained;
+	
+    coins += droppedItem.Value;
+    GetNode<Label>("%CoinCounter").Text = coins.ToString();
+    
+    CheckForUnlocks(droppedItem);
+    UpdateUnlockUI();
+    AddRecentItem(droppedItem);
+  }
 
-	private void CheckForUnlocks(DropItem lastFoundItem)
-	{
-		foreach (var item in drops)
-		{
-			if (!item.Unlocked && item.ReqItem == lastFoundItem.Name)
-			{
-				if (lastFoundItem.AmountFound >= item.ReqAmount)
-				{
-					item.Unlocked = true;
-					GD.Print($"🎉 NIEUW ITEM UNLOCKED: {item.Name}! 🎉");
-				}
-			}
-		}
-	}
+  private DropItem GetRandomDrop()
+  {
+    List<DropItem> availableDrops = new List<DropItem>();
+    float totalWeight = 0.0f;
+    
+    foreach (var item in drops)
+    {
+      if (item.Unlocked)
+      {
+        availableDrops.Add(item);
+        totalWeight += item.Weight;
+      }
+    }
+    
+    float roll = (float)GD.RandRange(0.0, totalWeight);
+    float cumulativeChance = 0.0f;
+    
+    foreach (var item in availableDrops)
+    {
+      cumulativeChance += item.Weight;
+      if (roll <= cumulativeChance)
+      {
+        return item;
+      }
+    }
+    
+    return availableDrops[0];
+  }
 
-	private void UpdateUnlockUI()
-	{
-		DropItem nextItem = null;
-		foreach (var item in drops)
-		{
-			if (!item.Unlocked)
-			{
-				nextItem = item;
-				break;
-			}
-		}
-		
-		var unlockLabel = GetNode<Label>("%UnlockLabel");
-		var unlockProgressBar = GetNode<ProgressBar>("%UnlockProgressBar");
-		var nextItemIcon = GetNode<TextureRect>("%NextItemIcon");
-		
-		if (nextItem != null)
-		{
-			int currentAmount = 0;
-			foreach (var item in drops)
-			{
-				if (item.Name == nextItem.ReqItem)
-				{
-					currentAmount = item.AmountFound;
-					break;
-				}
-			}
-			
-			unlockLabel.Text = $"Next item: {nextItem.Name}  ({currentAmount} / {nextItem.ReqAmount})";
-			unlockProgressBar.MaxValue = nextItem.ReqAmount;
-			unlockProgressBar.Value = currentAmount;
-			unlockProgressBar.Visible = true;
-			
-			nextItemIcon.Texture = GD.Load<Texture2D>(nextItem.Icon);
-			nextItemIcon.Visible = true;
-		}
-		else
-		{
-			unlockLabel.Text = "All items unlocked!";
-			unlockProgressBar.Visible = false;
-			nextItemIcon.Visible = false;
-		}
-	}
+  private void CheckForUnlocks(DropItem lastFoundItem)
+  {
+    foreach (var item in drops)
+    {
+      if (!item.Unlocked && item.ReqItem == lastFoundItem.Name)
+      {
+        if (lastFoundItem.AmountFound >= item.ReqAmount)
+        {
+          item.Unlocked = true;
+          GD.Print($" NIEUW ITEM UNLOCKED: {item.Name}! ");
+        }
+      }
+    }
+  }
 
-	private void AddRecentItem(DropItem item)
-	{
-		var recentItemsContainer = GetNode<HBoxContainer>("%RecentItemsContainer");
-		
-		VBoxContainer itemBox = new VBoxContainer();
-		
-		TextureRect icon = new TextureRect();
-		icon.Texture = GD.Load<Texture2D>(item.Icon);
-		icon.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
-		icon.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
-		// Aangepast naar 48x48 zodat het compacter oogt
-		icon.CustomMinimumSize = new Godot.Vector2(48, 48);
-		
-		Label valueLabel = new Label();
-		valueLabel.Text = $"+{item.Value}";
-		valueLabel.HorizontalAlignment = HorizontalAlignment.Center;
-		// Lettergrootte verkleind naar 16 voor betere balans
-		valueLabel.AddThemeFontSizeOverride("font_size", 16);
-		
-		itemBox.AddChild(icon);
-		itemBox.AddChild(valueLabel);
-		
-		recentItemsContainer.AddChild(itemBox);
-		
-		if (recentItemsContainer.GetChildCount() > 5)
-		{
-			Node oldestItem = recentItemsContainer.GetChild(0);
-			oldestItem.QueueFree();
-		}
-	}
+  private void UpdateUnlockUI()
+  {
+    DropItem nextItem = null;
+    foreach (var item in drops)
+    {
+      if (!item.Unlocked)
+      {
+        nextItem = item;
+        break;
+      }
+    }
+    
+    var unlockLabel = GetNode<Label>("%UnlockLabel");
+    var unlockProgressBar = GetNode<ProgressBar>("%UnlockProgressBar");
+    var nextItemIcon = GetNode<TextureRect>("%NextItemIcon");
+    
+    if (nextItem != null)
+    {
+      int currentAmount = 0;
+      foreach (var item in drops)
+      {
+        if (item.Name == nextItem.ReqItem)
+        {
+          currentAmount = item.AmountFound;
+          break;
+        }
+      }
+      
+      unlockLabel.Text = $"Next item: {nextItem.Name}  ({currentAmount} / {nextItem.ReqAmount})";
+      unlockProgressBar.MaxValue = nextItem.ReqAmount;
+      unlockProgressBar.Value = currentAmount;
+      unlockProgressBar.Visible = true;
+      
+      nextItemIcon.Texture = GD.Load<Texture2D>(nextItem.Icon);
+      nextItemIcon.Visible = true;
+    }
+    else
+    {
+      unlockLabel.Text = "All items unlocked!";
+      unlockProgressBar.Visible = false;
+      nextItemIcon.Visible = false;
+    }
+  }
 
-	public bool TrySpendCoins(int amount)
+  private void AddRecentItem(DropItem item)
+  {
+    var recentItemsContainer = GetNode<HBoxContainer>("%RecentItemsContainer");
+    
+    VBoxContainer itemBox = new VBoxContainer();
+    
+    TextureRect icon = new TextureRect();
+    icon.Texture = GD.Load<Texture2D>(item.Icon);
+    icon.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
+    icon.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
+    // Aangepast naar 48x48 zodat het compacter oogt
+    icon.CustomMinimumSize = new Godot.Vector2(48, 48);
+    
+    Label valueLabel = new Label();
+    valueLabel.Text = $"+{item.Value}";
+    valueLabel.HorizontalAlignment = HorizontalAlignment.Center;
+    // Lettergrootte verkleind naar 16 voor betere balans
+    valueLabel.AddThemeFontSizeOverride("font_size", 16);
+    
+    itemBox.AddChild(icon);
+    itemBox.AddChild(valueLabel);
+    
+    recentItemsContainer.AddChild(itemBox);
+    
+    if (recentItemsContainer.GetChildCount() > 5)
+    {
+      Node oldestItem = recentItemsContainer.GetChild(0);
+      oldestItem.QueueFree();
+    }
+  }
+
+  	public bool TrySpendCoins(int amount)
 	{
 		if (coins >= amount)
 		{

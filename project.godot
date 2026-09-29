@@ -15,6 +15,10 @@ run/main_scene="uid://b1qpg8003355f"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PokiSDK="*uid://c72j1j6g10y8w"
+
 [display]
 
 window/stretch/mode="canvas_items"
@@ -23,6 +27,10 @@ window/stretch/aspect="expand"
 [dotnet]
 
 project/assembly_name="TrashPandaClicker"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/poki-sdk/plugin.cfg")
 
 [physics]
 
