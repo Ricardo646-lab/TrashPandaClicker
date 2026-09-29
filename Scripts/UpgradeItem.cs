@@ -10,7 +10,7 @@ public partial class UpgradeItem : PanelContainer
 
     private Label _levelLabel;
     private Button _buyButton;
-    private TrashcanMain _mainGame;
+    private TrashcanRacoonAnimation _mainGame;
 
     // Styleboxes for dynamic button backgrounds
     private StyleBoxFlat _greenNormalStyle;
@@ -34,19 +34,16 @@ public partial class UpgradeItem : PanelContainer
 
     private void SetupStyles()
     {
-        // 1. Green Normal Style (Affordable)
         _greenNormalStyle = new StyleBoxFlat();
-        _greenNormalStyle.BgColor = new Color("#4CAF50"); // Standard green
+        _greenNormalStyle.BgColor = new Color("#4CAF50");
         _greenNormalStyle.SetCornerRadiusAll(6);
 
-        // 2. Dark Green Hover Style (Affordable + Hovered)
         _greenHoverStyle = new StyleBoxFlat();
-        _greenHoverStyle.BgColor = new Color("#2E7D32"); // Darker green
+        _greenHoverStyle.BgColor = new Color("#2E7D32");
         _greenHoverStyle.SetCornerRadiusAll(6);
 
-        // 3. Red Style (Unaffordable)
         _redStyle = new StyleBoxFlat();
-        _redStyle.BgColor = new Color("#E53935"); // Clean red
+        _redStyle.BgColor = new Color("#E53935");
         _redStyle.SetCornerRadiusAll(6);
     }
 
@@ -61,19 +58,16 @@ public partial class UpgradeItem : PanelContainer
 
         bool canAfford = _mainGame.GetCoins() >= _currentCost;
 
-        // Keep text color crisp white for both red and green states
         _buyButton.AddThemeColorOverride("font_color", Colors.White);
 
         if (canAfford)
         {
-            // Green background + Dark green hover effect
             _buyButton.AddThemeStyleboxOverride("normal", _greenNormalStyle);
             _buyButton.AddThemeStyleboxOverride("hover", _greenHoverStyle);
             _buyButton.AddThemeStyleboxOverride("pressed", _greenHoverStyle);
         }
         else
         {
-            // Red background + static hover (no hover color change)
             _buyButton.AddThemeStyleboxOverride("normal", _redStyle);
             _buyButton.AddThemeStyleboxOverride("hover", _redStyle);
             _buyButton.AddThemeStyleboxOverride("pressed", _redStyle);
@@ -106,9 +100,9 @@ public partial class UpgradeItem : PanelContainer
         _buyButton.Text = $"{_currentCost}";
     }
 
-    private TrashcanMain FindTrashcanMain(Node startNode)
+    private TrashcanRacoonAnimation FindTrashcanMain(Node startNode)
     {
-        if (startNode is TrashcanMain target)
+        if (startNode is TrashcanRacoonAnimation target)
             return target;
 
         foreach (Node child in startNode.GetChildren())

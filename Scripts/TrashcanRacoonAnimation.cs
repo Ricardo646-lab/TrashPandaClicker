@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public partial class TrashcanRacoonAnimation : Node2D
 {
 	private int coins = 0;
+	private int bonusClickPower = 0;
 
 	// Racoon animatie
 	private Area2D racoon;
@@ -28,15 +29,15 @@ public partial class TrashcanRacoonAnimation : Node2D
 	}
 
 	// Alle items
-	private List<DropItem> drops = new List<DropItem>
-	{
-		new DropItem { Name = "Banana", Value = 1, Weight = 50.0f, AmountFound = 0, Unlocked = true, ReqItem = "", ReqAmount = 0, Icon = "res://Sprites/BananaSprite.png" },
-		new DropItem { Name = "Can", Value = 2, Weight = 30.0f, AmountFound = 0, Unlocked = false, ReqItem = "Banana", ReqAmount = 100, Icon = "res://Sprites/CanSprite.png" },
-		new DropItem { Name = "Pizza", Value = 5, Weight = 12.0f, AmountFound = 0, Unlocked = false, ReqItem = "Can", ReqAmount = 50, Icon = "res://Sprites/PizzaSprite.png" },
-		new DropItem { Name = "Donut", Value = 10, Weight = 5.0f, AmountFound = 0, Unlocked = false, ReqItem = "Pizza", ReqAmount = 10, Icon = "res://Sprites/DonutSprite.png" },
-		new DropItem { Name = "Phone", Value = 50, Weight = 2.5f, AmountFound = 0, Unlocked = false, ReqItem = "Donut", ReqAmount = 5, Icon = "res://Sprites/PhoneSprite.png" },
-		new DropItem { Name = "Ring", Value = 250, Weight = 0.5f, AmountFound = 0, Unlocked = false, ReqItem = "Phone", ReqAmount = 2, Icon = "res://Sprites/RingSprite.png" }
-	};
+  private List<DropItem> drops = new List<DropItem>
+  {
+    new DropItem { Name = "Banana", Value = 1, Weight = 100.0f, AmountFound = 0, Unlocked = true, ReqItem = "", ReqAmount = 0, Icon = "res://Sprites/BananaSprite.png" },
+    new DropItem { Name = "Can", Value = 2, Weight = 25.0f, AmountFound = 0, Unlocked = false, ReqItem = "Banana", ReqAmount = 250, Icon = "res://Sprites/CanSprite.png" },
+    new DropItem { Name = "Pizza", Value = 5, Weight = 5.0f, AmountFound = 0, Unlocked = false, ReqItem = "Can", ReqAmount = 150, Icon = "res://Sprites/PizzaSprite.png" },
+    new DropItem { Name = "Donut", Value = 10, Weight = 1.0f, AmountFound = 0, Unlocked = false, ReqItem = "Pizza", ReqAmount = 50, Icon = "res://Sprites/DonutSprite.png" },
+    new DropItem { Name = "Phone", Value = 50, Weight = 0.2f, AmountFound = 0, Unlocked = false, ReqItem = "Donut", ReqAmount = 20, Icon = "res://Sprites/PhoneSprite.png" },
+    new DropItem { Name = "Ring", Value = 250, Weight = 0.05f, AmountFound = 0, Unlocked = false, ReqItem = "Phone", ReqAmount = 5, Icon = "res://Sprites/RingSprite.png" }
+  };
 
 	public override void _Ready()
 	{
@@ -53,6 +54,18 @@ public partial class TrashcanRacoonAnimation : Node2D
 		racoonAnimation.Play("idle");
 
 		UpdateUnlockUI();
+
+		// --- POKI SDK INTEGRATIE ---
+		if (HasNode("/root/PokiSDK"))
+		{
+			Node pokiSdk = GetNode("/root/PokiSDK");
+			pokiSdk.Call("gameplayStart");
+			GD.Print("Poki SDK: gameplayStart successfully called.");
+		}
+		else
+		{
+			GD.Print("Poki SDK not found (plugin is disabled or not installed).");
+		}
 	}
 
 	public override void _Process(double delta)
@@ -62,12 +75,10 @@ public partial class TrashcanRacoonAnimation : Node2D
 
 		timeSinceLastClick += delta;
 
-		// Er wordt niet meer geklikt
 		if (timeSinceLastClick >= DigTimeout)
 		{
 			wantsToKeepDigging = false;
 
-			// Alleen vanuit de loop stoppen
 			if (racoonAnimation.Animation == "dig_loop")
 			{
 				racoonAnimation.Play("dig_end");
@@ -95,10 +106,11 @@ public partial class TrashcanRacoonAnimation : Node2D
 
 		DropItem droppedItem = GetRandomDrop();
 
+		int itemsGained = 1 + bonusClickPower;
+		droppedItem.AmountFound += itemsGained;
+
 		coins += droppedItem.Value;
 		GetNode<Label>("%CoinCounter").Text = coins.ToString();
-
-		droppedItem.AmountFound++;
 
 		CheckForUnlocks(droppedItem);
 		UpdateUnlockUI();
@@ -109,7 +121,6 @@ public partial class TrashcanRacoonAnimation : Node2D
 	{
 		timeSinceLastClick = 0.0;
 
-		// Eerste klik
 		if (!isDigging)
 		{
 			isDigging = true;
@@ -119,11 +130,8 @@ public partial class TrashcanRacoonAnimation : Node2D
 			return;
 		}
 
-		// Extra klik betekent dat we door willen graven
 		wantsToKeepDigging = true;
 
-		// Als hij net bezig was met omhoog komen,
-		// meteen weer beginnen met graven
 		if (racoonAnimation.Animation == "dig_end")
 		{
 			racoonAnimation.Play("dig_start");
@@ -132,7 +140,6 @@ public partial class TrashcanRacoonAnimation : Node2D
 
 	private void OnAnimationFinished()
 	{
-		// Start is klaar
 		if (racoonAnimation.Animation == "dig_start")
 		{
 			if (wantsToKeepDigging &&
@@ -148,7 +155,6 @@ public partial class TrashcanRacoonAnimation : Node2D
 			return;
 		}
 
-		// Einde is klaar
 		if (racoonAnimation.Animation == "dig_end")
 		{
 			isDigging = false;
@@ -258,14 +264,12 @@ public partial class TrashcanRacoonAnimation : Node2D
 
 		VBoxContainer itemBox = new VBoxContainer();
 
-		// Item afbeelding
 		TextureRect icon = new TextureRect();
 		icon.Texture = GD.Load<Texture2D>(item.Icon);
 		icon.ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize;
 		icon.StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered;
 		icon.CustomMinimumSize = new Vector2(48, 48);
 
-		// Waarde
 		Label valueLabel = new Label();
 		valueLabel.Text = $"+{item.Value}";
 		valueLabel.HorizontalAlignment = HorizontalAlignment.Center;
@@ -276,11 +280,33 @@ public partial class TrashcanRacoonAnimation : Node2D
 
 		recentItemsContainer.AddChild(itemBox);
 
-		// Maximaal 5 recente items
 		if (recentItemsContainer.GetChildCount() > 5)
 		{
 			Node oldestItem = recentItemsContainer.GetChild(0);
 			oldestItem.QueueFree();
 		}
+	}
+
+	// --- SHOP & MUNTEN LOGICA ---
+	public bool TrySpendCoins(int amount)
+	{
+		if (coins >= amount)
+		{
+			coins -= amount;
+			GetNode<Label>("%CoinCounter").Text = coins.ToString();
+			return true;
+		}
+		return false;
+	}
+
+	public void AddBonusPerClick(int amount)
+	{
+		bonusClickPower += amount;
+		GD.Print($"New Bonus Per Click: +{bonusClickPower}");
+	}
+
+	public int GetCoins()
+	{
+		return coins;
 	}
 }
