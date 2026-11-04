@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WorldData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/item_data.gd" id="1_ojsau"]
+[ext_resource type="Resource" path="res://Data/items/icecream.tres" id="2_hfclg"]
+[ext_resource type="Resource" path="res://Data/items/sock.tres" id="3_w7vae"]
+[ext_resource type="Resource" path="res://Data/items/frisbee.tres" id="4_mm5xd"]
+[ext_resource type="Resource" path="res://Data/items/teddy.tres" id="5_ylssg"]
+[ext_resource type="Resource" path="res://Data/items/acorn.tres" id="6_winuf"]
+[ext_resource type="Script" path="res://Scripts/data/world_data.gd" id="7_4wl5b"]
+
+[resource]
+script = ExtResource("7_4wl5b")
+id = "park"
+name = "Park"
+cost = 50000.0
+items = Array[ExtResource("1_ojsau")]([ExtResource("2_hfclg"), ExtResource("3_w7vae"), ExtResource("4_mm5xd"), ExtResource("5_ylssg"), ExtResource("6_winuf")])

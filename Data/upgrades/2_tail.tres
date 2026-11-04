@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/upgrade_data.gd" id="1_hbm1k"]
+
+[resource]
+script = ExtResource("1_hbm1k")
+id = "tail"
+name = "Lucky Tail"
+cost = 400.0
+growth = 2.2
+max_level = 20
+unlock = 3

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RarityData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/rarity_data.gd" id="1_d362t"]
+
+[resource]
+script = ExtResource("1_d362t")
+color = Color(1, 0.95686275, 0.8392157, 1)
+weight = 100.0

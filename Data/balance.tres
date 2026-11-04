@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Balance" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/helper_data.gd" id="1_ftp7g"]
+[ext_resource type="Resource" path="res://Data/helpers/0_kit.tres" id="2_y7pgi"]
+[ext_resource type="Resource" path="res://Data/helpers/1_possum.tres" id="3_5qwna"]
+[ext_resource type="Resource" path="res://Data/helpers/2_pigeon.tres" id="4_7na1f"]
+[ext_resource type="Resource" path="res://Data/helpers/3_cart.tres" id="5_b1515"]
+[ext_resource type="Resource" path="res://Data/helpers/4_truck.tres" id="6_gf2cu"]
+[ext_resource type="Resource" path="res://Data/helpers/5_robot.tres" id="7_q0ts3"]
+[ext_resource type="Resource" path="res://Data/helpers/6_ufo.tres" id="8_60h0y"]
+[ext_resource type="Resource" path="res://Data/helpers/7_wizard.tres" id="9_r6ig3"]
+[ext_resource type="Resource" path="res://Data/helpers/8_dragon.tres" id="10_iv21i"]
+[ext_resource type="Script" path="res://Scripts/data/rarity_data.gd" id="11_q6qcr"]
+[ext_resource type="Resource" path="res://Data/rarities/0_common.tres" id="12_lekro"]
+[ext_resource type="Resource" path="res://Data/rarities/1_rare.tres" id="13_q1pbs"]
+[ext_resource type="Resource" path="res://Data/rarities/2_epic.tres" id="14_c1y2o"]
+[ext_resource type="Resource" path="res://Data/rarities/3_legendary.tres" id="15_nc21o"]
+[ext_resource type="Script" path="res://Scripts/data/balance.gd" id="16_pnvbx"]
+[ext_resource type="Script" path="res://Scripts/data/upgrade_data.gd" id="17_j5lu8"]
+[ext_resource type="Resource" path="res://Data/upgrades/0_claws.tres" id="18_yi75y"]
+[ext_resource type="Resource" path="res://Data/upgrades/1_paws.tres" id="19_ii2ha"]
+[ext_resource type="Resource" path="res://Data/upgrades/2_tail.tres" id="20_n1fub"]
+[ext_resource type="Resource" path="res://Data/upgrades/3_eyes.tres" id="21_dhlr7"]
+[ext_resource type="Resource" path="res://Data/upgrades/4_rage.tres" id="22_iudqs"]
+[ext_resource type="Resource" path="res://Data/upgrades/5_glove.tres" id="23_2i8o2"]
+[ext_resource type="Script" path="res://Scripts/data/world_data.gd" id="24_7o3s8"]
+[ext_resource type="Resource" path="res://Data/worlds/0_backyard.tres" id="25_sh31p"]
+[ext_resource type="Resource" path="res://Data/worlds/1_park.tres" id="26_jqwyl"]
+[ext_resource type="Resource" path="res://Data/worlds/2_pizza.tres" id="27_w4er1"]
+[ext_resource type="Resource" path="res://Data/worlds/3_beach.tres" id="28_3ik30"]
+[ext_resource type="Resource" path="res://Data/worlds/4_mall.tres" id="29_imbfw"]
+[ext_resource type="Resource" path="res://Data/worlds/5_space.tres" id="30_rhlvi"]
+
+[resource]
+script = ExtResource("16_pnvbx")
+rarities = Array[ExtResource("11_q6qcr")]([ExtResource("12_lekro"), ExtResource("13_q1pbs"), ExtResource("14_c1y2o"), ExtResource("15_nc21o")])
+worlds = Array[ExtResource("24_7o3s8")]([ExtResource("25_sh31p"), ExtResource("26_jqwyl"), ExtResource("27_w4er1"), ExtResource("28_3ik30"), ExtResource("29_imbfw"), ExtResource("30_rhlvi")])
+helpers = Array[ExtResource("1_ftp7g")]([ExtResource("2_y7pgi"), ExtResource("3_5qwna"), ExtResource("4_7na1f"), ExtResource("5_b1515"), ExtResource("6_gf2cu"), ExtResource("7_q0ts3"), ExtResource("8_60h0y"), ExtResource("9_r6ig3"), ExtResource("10_iv21i")])
+upgrades = Array[ExtResource("17_j5lu8")]([ExtResource("18_yi75y"), ExtResource("19_ii2ha"), ExtResource("20_n1fub"), ExtResource("21_dhlr7"), ExtResource("22_iudqs"), ExtResource("23_2i8o2")])
+milestones = PackedInt32Array(10, 25, 50, 100, 150, 200, 250, 300, 400, 500, 600, 700, 800, 900, 1000)

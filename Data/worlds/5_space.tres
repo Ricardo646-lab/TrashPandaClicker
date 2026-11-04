@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WorldData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/item_data.gd" id="1_roi0i"]
+[ext_resource type="Resource" path="res://Data/items/moonrock.tres" id="2_28eg2"]
+[ext_resource type="Resource" path="res://Data/items/goo.tres" id="3_d6jyb"]
+[ext_resource type="Resource" path="res://Data/items/raygun.tres" id="4_ygwsi"]
+[ext_resource type="Resource" path="res://Data/items/satellite.tres" id="5_pbmg4"]
+[ext_resource type="Resource" path="res://Data/items/star.tres" id="6_vl028"]
+[ext_resource type="Script" path="res://Scripts/data/world_data.gd" id="7_0sn2u"]
+
+[resource]
+script = ExtResource("7_0sn2u")
+id = "space"
+name = "Moon Base"
+cost = 500000000000000.0
+items = Array[ExtResource("1_roi0i")]([ExtResource("2_28eg2"), ExtResource("3_d6jyb"), ExtResource("4_ygwsi"), ExtResource("5_pbmg4"), ExtResource("6_vl028")])

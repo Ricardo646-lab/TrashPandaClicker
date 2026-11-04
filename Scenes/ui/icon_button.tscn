@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/icon_button.gd" id="1_btn"]
+
+[node name="IconButton" type="Control"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 84.0
+offset_bottom = 84.0
+script = ExtResource("1_btn")
+icon = "star"

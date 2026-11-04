@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="UpgradeData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/upgrade_data.gd" id="1_xlblu"]
+
+[resource]
+script = ExtResource("1_xlblu")
+id = "paws"
+name = "Big Paws"
+cost = 100.0
+growth = 2.1
+max_level = 20
+unlock = 5

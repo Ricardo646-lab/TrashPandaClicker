@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RarityData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/rarity_data.gd" id="1_yasji"]
+
+[resource]
+script = ExtResource("1_yasji")
+name = "LEGENDARY!"
+color = Color(1, 0.8117647, 0.23921569, 1)
+mult = 25.0
+weight = 0.12

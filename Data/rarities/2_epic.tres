@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RarityData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/rarity_data.gd" id="1_5vdjn"]
+
+[resource]
+script = ExtResource("1_5vdjn")
+name = "EPIC!"
+color = Color(0.8156863, 0.48235294, 1, 1)
+mult = 8.0

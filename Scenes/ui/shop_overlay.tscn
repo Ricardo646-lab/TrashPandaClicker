@@ -1,0 +1,26 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://Scripts/shop_overlay.gd" id="1_overlay"]
+[ext_resource type="Script" path="res://Scripts/shop.gd" id="2_shop"]
+[ext_resource type="PackedScene" path="res://Scenes/ui/icon_button.tscn" id="3_btn"]
+
+[node name="ShopOverlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_overlay")
+
+[node name="Shop" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 600.0
+script = ExtResource("2_shop")
+
+[node name="CloseButton" parent="." instance=ExtResource("3_btn")]
+offset_right = 72.0
+offset_bottom = 72.0
+icon = "close"
+color = Color(0.937, 0.294, 0.294, 1)

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WorldData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/item_data.gd" id="1_l2u7c"]
+[ext_resource type="Resource" path="res://Data/items/banana.tres" id="2_q1nju"]
+[ext_resource type="Resource" path="res://Data/items/apple.tres" id="3_vvx4l"]
+[ext_resource type="Resource" path="res://Data/items/fishbone.tres" id="4_hekc3"]
+[ext_resource type="Resource" path="res://Data/items/duck.tres" id="5_kqlbv"]
+[ext_resource type="Resource" path="res://Data/items/ring.tres" id="6_l4a5o"]
+[ext_resource type="Script" path="res://Scripts/data/world_data.gd" id="7_0dowy"]
+
+[resource]
+script = ExtResource("7_0dowy")
+id = "backyard"
+name = "Backyard"
+items = Array[ExtResource("1_l2u7c")]([ExtResource("2_q1nju"), ExtResource("3_vvx4l"), ExtResource("4_hekc3"), ExtResource("5_kqlbv"), ExtResource("6_l4a5o")])

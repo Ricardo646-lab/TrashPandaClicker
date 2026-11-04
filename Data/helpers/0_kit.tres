@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HelperData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/helper_data.gd" id="1_p24op"]
+
+[resource]
+script = ExtResource("1_p24op")
+id = "kit"
+name = "Baby Raccoon"
+cost = 15.0
+cps = 0.5

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HelperData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/helper_data.gd" id="1_o4oi1"]
+
+[resource]
+script = ExtResource("1_o4oi1")
+id = "dragon"
+name = "Trash Dragon"
+cost = 12000000000.0
+cps = 3000000.0

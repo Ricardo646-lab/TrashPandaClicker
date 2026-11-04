@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WorldData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/item_data.gd" id="1_bu3sw"]
+[ext_resource type="Resource" path="res://Data/items/pizza.tres" id="2_0iluy"]
+[ext_resource type="Resource" path="res://Data/items/donut.tres" id="3_vmiri"]
+[ext_resource type="Resource" path="res://Data/items/burger.tres" id="4_m6jd2"]
+[ext_resource type="Resource" path="res://Data/items/gamepad.tres" id="5_ej0bt"]
+[ext_resource type="Resource" path="res://Data/items/crown.tres" id="6_5fnfw"]
+[ext_resource type="Script" path="res://Scripts/data/world_data.gd" id="7_2nxsn"]
+
+[resource]
+script = ExtResource("7_2nxsn")
+id = "pizza"
+name = "Pizza Street"
+cost = 8000000.0
+items = Array[ExtResource("1_bu3sw")]([ExtResource("2_0iluy"), ExtResource("3_vmiri"), ExtResource("4_m6jd2"), ExtResource("5_ej0bt"), ExtResource("6_5fnfw")])

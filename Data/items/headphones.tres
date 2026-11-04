@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/item_data.gd" id="1_4t8qx"]
+
+[resource]
+script = ExtResource("1_4t8qx")
+id = "headphones"
+name = "Headphones"
+rarity = 2

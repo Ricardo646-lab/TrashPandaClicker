@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HelperData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/helper_data.gd" id="1_s3jjl"]
+
+[resource]
+script = ExtResource("1_s3jjl")
+id = "pigeon"
+name = "Pigeon"
+cost = 1300.0
+cps = 24.0

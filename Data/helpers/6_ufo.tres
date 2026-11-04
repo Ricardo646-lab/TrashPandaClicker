@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HelperData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/helper_data.gd" id="1_66vbb"]
+
+[resource]
+script = ExtResource("1_66vbb")
+id = "ufo"
+name = "UFO"
+cost = 35000000.0
+cps = 40000.0

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WorldData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/item_data.gd" id="1_rkx6n"]
+[ext_resource type="Resource" path="res://Data/items/shell.tres" id="2_dhhjy"]
+[ext_resource type="Resource" path="res://Data/items/flipflop.tres" id="3_5psxw"]
+[ext_resource type="Resource" path="res://Data/items/bottle.tres" id="4_x5x78"]
+[ext_resource type="Resource" path="res://Data/items/chest.tres" id="5_a4ar3"]
+[ext_resource type="Resource" path="res://Data/items/pearl.tres" id="6_1842q"]
+[ext_resource type="Script" path="res://Scripts/data/world_data.gd" id="7_js17k"]
+
+[resource]
+script = ExtResource("7_js17k")
+id = "beach"
+name = "Beach"
+cost = 3000000000.0
+items = Array[ExtResource("1_rkx6n")]([ExtResource("2_dhhjy"), ExtResource("3_5psxw"), ExtResource("4_x5x78"), ExtResource("5_a4ar3"), ExtResource("6_1842q")])

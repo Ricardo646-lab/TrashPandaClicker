@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HelperData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/data/helper_data.gd" id="1_v4uhr"]
+
+[resource]
+script = ExtResource("1_v4uhr")
+id = "truck"
+name = "Trash Truck"
+cost = 180000.0
+cps = 850.0
