@@ -1,7 +1,7 @@
 extends Control
 
 # Everything on top of the play area (Scenes/ui/hud.tscn): coin counter,
-# next-world bar, buttons, boosts, the shop and the popups. Place and
+# next-world bar, buttons, boosts, the quick-buy card, the shop and the popups. Place and
 # size the parts in the scene; this script only connects them.
 
 signal travel_pressed
@@ -16,6 +16,7 @@ signal play_pressed
 @onready var sound_button: IconButton = %SoundButton
 @onready var shop_button: IconButton = %ShopButton
 @onready var boosts: Control = %BoostList
+@onready var quick_buy: Control = %QuickBuy
 @onready var shop_overlay: Control = %ShopOverlay
 @onready var shop: Control = %ShopOverlay.shop
 @onready var popup: Control = %Popup
@@ -40,6 +41,10 @@ func _ready() -> void:
 		Sfx.apply_settings()
 		Game.save_game())
 	shop_button.pressed.connect(func() -> void: shop_overlay.open())
+	# The buy card opens the shop at the item it shows.
+	quick_buy.opened.connect(func(kind: String, index: int) -> void:
+		shop_overlay.open()
+		shop.focus(kind, index))
 	popup.action.connect(func(id: String) -> void: popup_action.emit(id))
 	start_screen.play_pressed.connect(func() -> void:
 		started = true
@@ -53,7 +58,7 @@ func menu_open() -> bool:
 
 func _process(_delta: float) -> void:
 	# Nothing of the HUD shows on the start screen.
-	for part in [counter, boosts, album_button, music_button, sound_button, shop_button]:
+	for part in [counter, boosts, album_button, music_button, sound_button, shop_button, quick_buy]:
 		part.visible = started
 	world_bar.visible = started and Game.has_next_world()
 	cap_button.visible = started and Game.prestige_unlocked()

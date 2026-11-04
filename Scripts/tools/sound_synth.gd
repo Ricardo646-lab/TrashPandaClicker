@@ -19,6 +19,7 @@ func build_sounds() -> Dictionary:
 			tone(140.0 + i * 20.0, 60.0, 0.09, 0.45),
 			crinkle(0.12 + i * 0.02, 0.35),
 		]))
+	sounds.pop = to_stream(tone(420.0, 980.0, 0.07, 0.3, 0.002, 1.2))
 	sounds.coin = to_stream(seq([1568.0, 2093.0], [0.0, 0.05], 0.18, 0.18))
 	sounds.tab = to_stream(mix([tone(900.0, 700.0, 0.04, 0.2), noise(0.02, 0.15, 0.5)]))
 	sounds.rare = to_stream(seq([784.0, 988.0, 1175.0], [0.0, 0.06, 0.12], 0.25, 0.22))

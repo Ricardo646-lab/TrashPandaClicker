@@ -271,6 +271,19 @@ func dig() -> Dictionary:
 
 # --- Shop ---------------------------------------------------------------------
 
+# True until the player buys anything (used for the "BUY!" hints).
+func never_bought() -> bool:
+	if caps > 0:
+		return false
+	for n in helpers:
+		if n > 0:
+			return false
+	for id in upgrades:
+		if upgrades[id] > 0:
+			return false
+	return true
+
+
 func helper_unit_cost(index: int, owned: int) -> float:
 	return GameData.helpers[index].cost * pow(GameData.helper_growth, owned)
 

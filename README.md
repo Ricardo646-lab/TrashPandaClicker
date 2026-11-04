@@ -51,6 +51,7 @@ The resource types are defined in `Scripts/data/`. The art for an item or helper
 | `fx.gd` | Effects: flying items, numbers, sparkles, coins, banners, shake. |
 | `hud.gd`, `coin_counter.gd`, `boost_list.gd`, `world_bar.gd`, `icon_button.gd` | The HUD parts. |
 | `shop.gd`, `shop_overlay.gd`, `popup.gd`, `start_screen.gd` | Shop, popups (album, prestige, welcome back) and the title screen. |
+| `quick_buy.gd` | The small card under the SHOP button: shows the best thing you can buy now. Tapping it opens the shop at that item (which glows). Shows a "BUY!" paw until the first purchase. |
 | `main.gd` | Connects game events to effects and sounds. |
 | `tools/sound_synth.gd`, `tools/bake_sounds.gd` | The sound synthesizer and the script that bakes it to `Sounds/`. |
 | `tools/balance_sim.gd` | Balance check: a bot plays the game and prints when each world is reached. Run: `godot --headless --path . -s res://Scripts/tools/balance_sim.gd -- 4` (4 = taps per second). |

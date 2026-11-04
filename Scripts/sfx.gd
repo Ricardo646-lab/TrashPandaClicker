@@ -5,7 +5,7 @@ extends Node
 # so the game does not have to generate them every time it starts.
 
 const PLAYER_COUNT := 12
-const SOUND_NAMES := ["dig_1", "dig_2", "dig_3", "coin", "tab", "rare", "epic", "legend",
+const SOUND_NAMES := ["dig_1", "dig_2", "dig_3", "pop", "coin", "tab", "rare", "epic", "legend",
 	"crit", "buy", "deny", "milestone", "travel", "golden_appear", "golden_get", "rage",
 	"new_item", "whoosh"]
 
@@ -66,6 +66,7 @@ func play_dig(combo: float) -> void:
 	# Pitch goes up while the rage meter fills, so fast tapping "climbs".
 	var pitch := randf_range(0.9, 1.1) + combo * 0.35
 	play(["dig_1", "dig_2", "dig_3"].pick_random(), -3.0, pitch)
+	play("pop", -8.0, pitch)
 
 
 func play_find(rarity: int) -> void:

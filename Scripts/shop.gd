@@ -31,6 +31,9 @@ var _hold := 0.0
 var _repeat := 0.0
 var _repeated := false
 var _bumps := {}
+# The row the buy card pointed at: it glows for a few seconds.
+var _focus_key := ""
+var _focus_time := 0.0
 var _redraw_timer := 0.0
 var _shakes := {}
 
@@ -64,6 +67,19 @@ func rows() -> Array:
 			if mystery:
 				break
 	return out
+
+
+# Opens the right tab and scrolls to an item, which then glows.
+func focus(kind: String, index: int) -> void:
+	tab = 1 if kind == "helper" else 0
+	var all := rows()
+	for i in all.size():
+		if all[i].kind == kind and all[i].index == index:
+			var list := list_rect()
+			scroll = clampf(i * ROW_H - (list.size.y - ROW_H) * 0.5, 0.0, max_scroll())
+			scroll_vel = 0.0
+	_focus_key = "%s_%d" % [kind, index]
+	_focus_time = 3.0
 
 
 func max_scroll() -> float:
@@ -100,7 +116,9 @@ func _process(delta: float) -> void:
 	# Redraw every frame while something moves; otherwise 15 times a
 	# second is enough for the prices and coins (saves a lot on phones).
 	_redraw_timer -= delta
-	var moving := _pressing or scroll_vel != 0.0 or scroll < 0.0 or scroll > top
+	_focus_time = maxf(_focus_time - delta, 0.0)
+	var moving := _pressing or scroll_vel != 0.0 or scroll < 0.0 or scroll > top or _focus_time > 0.0 \
+		or (_focus_key != "" and Game.never_bought())
 	for v in _bumps.values() + _shakes.values():
 		moving = moving or v > 0.0
 	if moving or _redraw_timer <= 0.0:
@@ -346,6 +364,17 @@ func _draw_row(row: Dictionary, r: Rect2) -> void:
 		Art.text(self, price, Vector2(pr.position.x + 40, pr.get_center().y), size_px, Art.WHITE, HORIZONTAL_ALIGNMENT_LEFT)
 		if amount() != 1:
 			Art.text(self, "x%d" % buy_count, Vector2(pr.end.x - 4, pr.position.y - 2), 16, Art.YELLOW, HORIZONTAL_ALIGNMENT_RIGHT)
+		# The item the buy card pointed at glows; before the first buy a paw
+		# points at its price button.
+		if key == _focus_key:
+			if _focus_time > 0.0:
+				var glow := 0.5 + 0.5 * sin(_t * 10.0)
+				draw_polyline(Art.closed(Art.rrect(r.grow(6), 22)), Color(Art.YELLOW, 0.5 + 0.5 * glow), 6.0, true)
+			if Game.never_bought():
+				var bounce := absf(sin(_t * 6.0)) * 12.0
+				var paw := Vector2(pr.position.x - 34 - bounce, pr.get_center().y)
+				Art.icon(self, "claws", paw, 0.55, PI * 0.5)
+				Art.text(self, "BUY!", paw + Vector2(-2, -38), 24, Art.YELLOW)
 
 	# Name, effect and the next x2 milestone for helpers.
 	var tx := box.end.x + 12
