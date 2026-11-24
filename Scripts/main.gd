@@ -30,6 +30,7 @@ func _ready() -> void:
 
 
 func _on_play() -> void:
+	Poki.play_pressed()
 	Sfx.start_music()
 	Sfx.play("golden_get", -4.0)
 	if Game.offline_gain >= 1.0:
